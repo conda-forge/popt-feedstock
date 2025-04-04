@@ -1,19 +1,16 @@
 {% set name = "popt" %}
-{% set version = "1.16" %}
+{% set version = "1.19" %}
 
 package:
   name: {{ name|lower }}
   version: {{ version }}
 
 source:
-  - url: ftp://anduin.linuxfromscratch.org/BLFS/{{ name }}/{{ name }}-{{ version }}.tar.gz
-    sha256: e728ed296fe9f069a0e005003c3d6b2dde3d9cad453422a10d6558616d304cc8
-    patches:
-      - 0001-remove-tests-58-and-59.patch  # [osx]
-      - 0002-added-sanity-autotest.patch
+  - url: http://ftp.rpm.org/{{ name|lower }}/releases/{{ name|lower }}-1.x/{{ name|lower }}-{{ version }}.tar.gz
+    sha256: c25a4838fc8e4c1c8aacb8bd620edb3084a3d63bf8987fdad3ca2758c63240f9
 
 build:
-  number: 2002
+  number: 0
   skip: True  # [win]
   run_exports:
     - {{ pin_subpackage(name, max_pin='x') }}
