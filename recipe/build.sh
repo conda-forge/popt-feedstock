@@ -1,10 +1,9 @@
 #!/bin/sh
-# Get an updated config.sub and config.guess
-cp $BUILD_PREFIX/share/gnuconfig/config.* .
 
 set -e -o pipefail
 
-./configure --prefix=$PREFIX
+./configure --prefix=${PREFIX} --disable-debug --disable-dependency-tracking
+
 make
 if [[ "${CONDA_BUILD_CROSS_COMPILATION}" != "1" ]]; then
   make check
