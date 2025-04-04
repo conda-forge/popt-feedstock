@@ -13,7 +13,7 @@ build:
   number: 0
   run_exports:
     - {{ pin_subpackage(name, max_pin='x') }}
-  skip: True  # [win or (osx and arm64)]
+  skip: True  # [win]
 
 requirements:
   build:
