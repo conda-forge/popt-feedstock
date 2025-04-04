@@ -19,19 +19,17 @@ requirements:
   build:
     - {{ compiler('c') }}
     - {{ stdlib('c') }}
-    - gnuconfig  # [unix]
-    - libiconv
-    - perl
     - make
-  run:
+    - libiconv
+  host:
     - libiconv
 
 test:
   commands:
-    - test -f $PREFIX/include/popt.h
-    - test -f $PREFIX/lib/libpopt.a
-    - test -f $PREFIX/lib/libpopt.so  # [linux]
-    - test -f $PREFIX/lib/libpopt.dylib  # [osx]
+    - test -f ${PREFIX}/include/popt.h
+    - test -f ${PREFIX}/lib/libpopt.a
+    - test -f ${PREFIX}/lib/libpopt.so  # [linux]
+    - test -f ${PREFIX}/lib/libpopt.dylib  # [osx]
 
 about:
   home: http://ftp.rpm.org/popt/
