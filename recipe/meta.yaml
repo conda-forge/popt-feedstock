@@ -11,9 +11,9 @@ source:
 
 build:
   number: 0
+  skip: True  # [win]
   run_exports:
     - {{ pin_subpackage(name, max_pin='x') }}
-  skip: True  # [win]
 
 requirements:
   build:
@@ -21,6 +21,7 @@ requirements:
     - {{ stdlib('c') }}
     - make
     - libiconv
+    - gnuconfig
   host:
     - libiconv
 
