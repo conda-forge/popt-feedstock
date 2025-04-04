@@ -18,8 +18,9 @@ build:
 
 requirements:
   build:
-    - gnuconfig  # [unix]
     - {{ compiler('c') }}
+    - {{ stdlib('c') }}
+    - gnuconfig  # [unix]
     - libiconv
     - perl
     - make
@@ -34,10 +35,12 @@ test:
     - test -f $PREFIX/lib/libpopt.dylib  # [osx]
 
 about:
-  home: http://rpm5.org/
+  home: http://ftp.rpm.org/popt/
   license: MIT
   license_file: COPYING
   summary: 'Popt is a C library for parsing command line parameters.'
+  dev_url: https://github.com/rpm-software-management/popt
+  doc_url: https://github.com/rpm-software-management/popt/blob/popt-1.19-release/popt.pdf
 
 extra:
   recipe-maintainers:
