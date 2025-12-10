@@ -28,7 +28,7 @@ requirements:
 test:
   commands:
     - test -f ${PREFIX}/include/popt.h
-    - test -f ${PREFIX}/lib/libpopt.a
+    - test ! -f ${PREFIX}/lib/libpopt.a
     - test -f ${PREFIX}/lib/libpopt.so  # [linux]
     - test -f ${PREFIX}/lib/libpopt.dylib  # [osx]
 
