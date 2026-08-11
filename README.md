@@ -3,11 +3,11 @@ About popt-feedstock
 
 Feedstock license: [BSD-3-Clause](https://github.com/conda-forge/popt-feedstock/blob/main/LICENSE.txt)
 
-Home: http://ftp.rpm.org/popt/
+Home: http://ftp.rpm.org/popt
 
 Package license: MIT
 
-Summary: Popt is a C library for parsing command line parameters.
+Summary: C library for parsing command line parameters
 
 Development: https://github.com/rpm-software-management/popt
 
