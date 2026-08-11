@@ -29,7 +29,7 @@ requirements:
     - ${{ pin_subpackage('popt', upper_bound='x') }}
 
 tests:
-  - package_contens:
+  - package_contents:
       include:
         - popt.h
       lib:
