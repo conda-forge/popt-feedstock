@@ -34,7 +34,6 @@ tests:
         - popt.h
       lib:
         - popt
-      strict: true
 
 about:
   homepage: http://ftp.rpm.org/popt
