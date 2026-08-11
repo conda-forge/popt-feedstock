@@ -31,10 +31,10 @@ requirements:
 tests:
   - package_contens:
       include:
-        popt.h
+        - popt.h
       lib:
-        popt
-        ${{ 'libpopt.a' if unix }}
+        - popt
+        - ${{ 'libpopt.a' if unix }}
 
 about:
   homepage: http://ftp.rpm.org/popt
