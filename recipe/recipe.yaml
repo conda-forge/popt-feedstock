@@ -34,7 +34,7 @@ tests:
         - popt.h
       lib:
         - popt
-        - ${{ 'libpopt.a' if unix }}
+      strict: true
 
 about:
   homepage: http://ftp.rpm.org/popt
