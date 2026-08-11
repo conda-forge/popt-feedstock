@@ -1,45 +1,48 @@
-{% set name = "popt" %}
-{% set version = "1.19" %}
+schema_version: 1
+
+context:
+  version: '1.19'
 
 package:
-  name: {{ name|lower }}
-  version: {{ version }}
+  name: popt
+  version: ${{ version }}
 
 source:
-  - url: http://ftp.rpm.org/{{ name|lower }}/releases/{{ name|lower }}-1.x/{{ name|lower }}-{{ version }}.tar.gz
-    sha256: c25a4838fc8e4c1c8aacb8bd620edb3084a3d63bf8987fdad3ca2758c63240f9
+  url: http://ftp.rpm.org/popt/releases/popt-1.x/popt-${{ version }}.tar.gz
+  sha256: c25a4838fc8e4c1c8aacb8bd620edb3084a3d63bf8987fdad3ca2758c63240f9
 
 build:
   number: 1
-  skip: True  # [win]
-  run_exports:
-    - {{ pin_subpackage(name, max_pin='x') }}
+  skip:
+    - win
 
 requirements:
   build:
-    - gnuconfig  # [unix]
-    - {{ compiler('c') }}
-    - {{ stdlib('c') }}
-    - make
+    - ${{ compiler('c') }}
+    - ${{ stdlib('c') }}
+    - ${{ 'gnuconfig' if unix }}
     - libiconv
-    - gnuconfig
+    - make
   host:
     - libiconv
+  run_exports:
+    - ${{ pin_subpackage(name, max_pin='x') }}
 
-test:
-  commands:
-    - test -f ${PREFIX}/include/popt.h
-    - test ! -f ${PREFIX}/lib/libpopt.a
-    - test -f ${PREFIX}/lib/libpopt.so  # [linux]
-    - test -f ${PREFIX}/lib/libpopt.dylib  # [osx]
+tests:
+  - package_contens:
+      include:
+        popt.h
+      lib:
+        popt
+        ${{ 'libpopt.a' if unix }}
 
 about:
-  home: http://ftp.rpm.org/popt/
+  homepage: http://ftp.rpm.org/popt
+  repository: https://github.com/rpm-software-management/popt
+  documentation: https://github.com/rpm-software-management/popt/blob/popt-${{ version }}-release/popt.pdf
   license: MIT
   license_file: COPYING
-  summary: 'Popt is a C library for parsing command line parameters.'
-  dev_url: https://github.com/rpm-software-management/popt
-  doc_url: https://github.com/rpm-software-management/popt/blob/popt-1.19-release/popt.pdf
+  summary: 'C library for parsing command line parameters'
 
 extra:
   recipe-maintainers:
