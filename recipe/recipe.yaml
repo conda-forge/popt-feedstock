@@ -8,21 +8,31 @@ package:
   version: ${{ version }}
 
 source:
-  url: http://ftp.rpm.org/popt/releases/popt-1.x/popt-${{ version }}.tar.gz
-  sha256: c25a4838fc8e4c1c8aacb8bd620edb3084a3d63bf8987fdad3ca2758c63240f9
+  url: https://github.com/rpm-software-management/popt/archive/refs/tags/popt-${{ version }}-release.tar.gz
+  sha256: 6eb40d650526cb9fe63eb4415bcecdf9cf306f7556e77eff689abc5a44670060
+  patches:
+    - popt-windows-support.patch
 
 build:
-  number: 1
-  skip:
-    - win
+  number: 2
 
 requirements:
   build:
     - ${{ compiler('c') }}
     - ${{ stdlib('c') }}
-    - ${{ 'gnuconfig' if unix }}
+    - gettext-tools
     - libiconv
-    - make
+    - if: unix
+      then:
+        - autoconf
+        - automake
+        - libtool
+        - gnuconfig
+        - make
+    - if: win
+      then:
+        - autotools_clang_conda
+        
   host:
     - libiconv
   run_exports:
@@ -35,6 +45,22 @@ tests:
       lib:
         - popt
 
+  # TODO: Re-enable once rattler-build Windows test cleanup is fixed.
+  # See https://github.com/prefix-dev/rattler-build/issues/2657
+  # - script:
+  #     - if: win
+  #       then: |
+  #         cl /nologo /W4 /I"%LIBRARY_INC%" test_popt.c /link /LIBPATH:"%LIBRARY_LIB%" popt.lib /OUT:test_popt.exe
+  #         test_popt.exe
+  #   requirements:
+  #     run:
+  #       - if: win
+  #         then:
+  #           - ${{ compiler('c') }}
+  #   files:
+  #     recipe:
+  #       - test_popt.c
+    
 about:
   homepage: http://ftp.rpm.org/popt
   repository: https://github.com/rpm-software-management/popt
