@@ -32,7 +32,7 @@ requirements:
     - if: win
       then:
         - autotools_clang_conda
-        
+
   host:
     - libiconv
   run_exports:
@@ -60,7 +60,7 @@ tests:
     files:
       recipe:
         - test_popt.c
-    
+
 about:
   homepage: http://ftp.rpm.org/popt
   repository: https://github.com/rpm-software-management/popt
